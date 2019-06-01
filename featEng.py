@@ -142,10 +142,10 @@ def split_df(df, target):
 
 
 #%%
-df = pd.read_csv(TRAINSET)
-df = df.set_index(['building_id'])
-data = handle_missVal(df)
-X, y, y_transformer = feature_enginner(data, TARGET, y_trans=None)
+#df = pd.read_csv(TRAINSET)
+#df = df.set_index(['building_id'])
+#data = handle_missVal(df)
+#X, y, y_transformer = feature_enginner(data, TARGET, y_trans=None)
 #trans_plot(data, col=TARGET)
 
 
