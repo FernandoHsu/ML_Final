@@ -9,7 +9,37 @@ import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.metrics import mean_squared_error
 
+import re
 
+#def get_predScore(y_true, y_pred):
+#    pass
+
+
+
+
+def find_feature(pattern, all_features):
+    res = np.zeros_like(all_features, dtype='bool')
+    count_match = 0
+    for i,s in enumerate(all_features):
+        match = re.search(pattern, s)
+        if match:
+            res[i]=True
+            count_match+=1
+    return count_match, res
+    
+def record_featureType(df):
+    all_features = np.array(df.columns, dtype='str')
+    # 該房屋方圓 ?? 公尺內有無 ?? 類別
+    count, bool_feat = find_feature('[\w+]_index_[\w+]', all_features)
+    print('Found boolean features:{0}'.format(count))
+    
+    # 該房屋方圓 ?? 公尺內 ?? 類別種類數
+    count, count_feat = find_feature('0$', all_features)
+    print('Found boolean features:{0}'.format(count))
+    
+    # 該房屋與最近的 ?? 類別之距離
+    count, dist_feat = find_feature('[\w+]MIN', all_features)
+    print('Found boolean features:{0}'.format(count))
 
 def split_XY(df, target, var_to_drop=['parking_price']):
     #df['lgParkPrice'] = np.log(df['parking_price'])

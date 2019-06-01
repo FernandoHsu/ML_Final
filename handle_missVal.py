@@ -17,7 +17,11 @@ TARGET = 'total_price'
 df = pd.read_csv(DATASET)
 
 #%% 4 col with missing value
-def handle_missVal(df):
+def handle_missVal(df, copy=True):
+    """
+    return: a new data framw withou missing value
+    """
+    print('Deep copy data frame')
     data = df.copy(deep=True)
     show_miss(data)
     for proc in [proc_1, proc_2, proc_3]:
